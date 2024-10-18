@@ -1,7 +1,7 @@
 const LIMIT = 10000;
-const currency = 'руб.';
-const STATUS_IN_LIMIT = 'Все хорошо';
-const STATUS_OUT_OF_LIMIT = 'Все плохо';
+const currency = 'rub.';
+const STATUS_IN_LIMIT = 'Everything is okey';
+const STATUS_OUT_OF_LIMIT = 'Everything is bad';
 const STATUS_OUT_OF_LIMIT_CLASSNAME = 'expense__status--unsuccess';
 
 let expenses = [];
@@ -46,7 +46,7 @@ function trackExpense() {
 
   const currentCategory = getCategory();
 
-  if (currentCategory === 'Категория') {
+  if (currentCategory === 'Category') {
     return;
   }
 
@@ -114,7 +114,7 @@ function renderStatus(sum) {
   } else {
     statusElement.innerText = `${STATUS_OUT_OF_LIMIT} (${
       LIMIT - totalSum
-    } руб.)`;
+    } rub.)`;
     statusElement.classList.add(STATUS_OUT_OF_LIMIT_CLASSNAME);
   }
 }
