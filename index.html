@@ -12,7 +12,7 @@
     </section>
     <section class="expense__box">
       <div class="container">
-        <h1 class="expense__title">Учет расходов</h1>
+        <h1 class="expense__title">Expense accounting</h1>
         <div class="row expense__row-input">
           <div class="col">
             <div class="expense__input-box">
@@ -20,44 +20,44 @@
             </div>
           </div>
           <div class="col">
-            <button class="expense__btn btn js-btn">Добавить</button>
+            <button class="expense__btn btn js-btn">Add</button>
           </div>
         </div>
         <div class="row expense__row-category">
           <div class="col">
             <select class="js-expense-category expense__category">
               <option hidden disabled selected value="Категория">
-                Категория
+                Category
               </option>
-              <option value="Кафе">Кафе</option>
-              <option value="Продукты">Продукты</option>
-              <option value="Авто">Авто</option>
-              <option value="Интернет">Интернет</option>
+              <option value="Кафе">Caffe</option>
+              <option value="Продукты">Goods</option>
+              <option value="Авто">Auto</option>
+              <option value="Интернет">Internet</option>
             </select>
           </div>
         </div>
         <div class="row expense__row-output">
           <div class="col expense__indicate-values">
             <p>
-              Лимит:
+              Limit:
               <span class="js-limit"></span>
-              руб.
+              rub.
             </p>
             <p>
-              Сумма:
+              Total:
               <span class="js-total"></span>
-              руб.
+              rub.
             </p>
             <p>
-              Статус:
+              Status:
               <span class="js-status expense__status--success"></span>
             </p>
             <button class="js-reset-btn expense__reset-btn btn--red btn">
-              Сбросить расходы
+              Reset expenses
             </button>
           </div>
           <div class="col">
-            <h2 class="expense__output-title">История</h2>
+            <h2 class="expense__output-title">History</h2>
             <div class="expense__output js-history"></div>
           </div>
         </div>

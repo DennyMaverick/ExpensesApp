@@ -116,7 +116,7 @@ ul {
 }
 
 .expense__input-box::after {
-  content: 'руб.';
+  content: 'rub.';
   text-transform: uppercase;
 }
 
