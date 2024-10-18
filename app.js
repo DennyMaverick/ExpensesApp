@@ -22,10 +22,11 @@ const resetBtn = document.querySelector('.js-reset-btn');
 
 const expenseCategoryElem = document.querySelector('.js-expense-category');
 
+const errorPopup = document.querySelector('.js-expense__error-popup');
+
 init(expenses);
 
 buttonElement.addEventListener('click', function () {
-
   trackExpense();
 
   render(expenses);
@@ -40,20 +41,24 @@ function init(expenses) {
 function trackExpense() {
   const currentAmount = getExpenseFromUser();
 
-  if (!currentAmount) {
+  const currentCategory = getCategory();
+
+  if (currentCategory === 'Category' || !currentAmount) {
+    errorPopup.classList.remove('hide');
+
+    setTimeout(() => {
+      errorPopup.classList.add('hide');
+    }, 3000);
     return;
   }
 
-  const currentCategory = getCategory();
-
-  if (currentCategory === 'Category') {
+  if (!currentAmount) {
     return;
   }
 
   const newExpense = {amount: currentAmount, category: currentCategory};
 
   expenses.push(newExpense);
-
 }
 
 function getExpenseFromUser() {
@@ -125,7 +130,6 @@ inputElement.addEventListener('keypress', function (e) {
     trackExpense();
 
     render(expenses);
-    console.log(expenses);
   }
 });
 

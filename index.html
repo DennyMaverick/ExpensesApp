@@ -19,6 +19,9 @@
               <input class="js-expense-input expense__input" type="number" />
             </div>
           </div>
+          <div class="col js-expense__error-popup expense__error-popup hide">
+            The text field is empty or the category is not selected
+          </div>
           <div class="col">
             <button class="expense__btn btn js-btn">Add</button>
           </div>
@@ -26,12 +29,12 @@
         <div class="row expense__row-category">
           <div class="col">
             <select class="js-expense-category expense__category">
-              <option hidden disabled selected value="Категория">
+              <option hidden disabled selected value="Category">
                 Category
               </option>
               <option value="Cafe">Cafe</option>
               <option value="Goods">Goods</option>
-              <option value="Auto">Auto</option>
+              <option value="Car">Car</option>
               <option value="Internet">Internet</option>
             </select>
           </div>

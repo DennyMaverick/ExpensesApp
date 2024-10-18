@@ -194,3 +194,23 @@ ul {
     display: block;
   }
 }
+
+.expense__error-popup {
+  width: 320px;
+  line-height: 1.5;
+  text-transform: uppercase;
+  margin-right: auto;
+  margin-left: 70px;
+  align-self: center;
+  padding: 15px 20px;
+  background-color: #2b2b2b;
+  border-radius: 5px;
+  color: red;
+  transition: .4s linear opacity, .4s linear visibility, .4s linear transform;
+}
+
+.hide {
+  opacity: 0;
+  visibility: hidden;
+  transform: scale(0);
+}
