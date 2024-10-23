@@ -6,11 +6,10 @@
 
 body {
   font-family: sans-serif;
+  background-color: #2b2b2b;
   display: flex;
-  justify-content: center;
-  flex-direction: column;
+  min-height: 100%;
   height: 100vh;
-  align-items: center;
 }
 
 .container {
@@ -37,6 +36,12 @@ p {
   font-size: 25px;
   color: coral;
   margin-bottom: 30px;
+}
+
+.expense__version-for-mobile {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .expense__subtitle {
@@ -171,14 +176,13 @@ p {
   background-color: coral;
 }
 
-.expense__box {
-  margin-top: 100px;
-  margin-bottom: 100px;
-  overflow-y: scroll;
-  border: 1px solid #2b2b2b;
-  padding: 20px;
-  border-radius: 5px;
-  background-color: #2b2b2b;
+.expense__inner {
+  display: flex;
+  flex-direction: column;
+  padding-top: 100px;
+  padding-bottom: 100px;
+  padding-left: 40px;
+  padding-right: 40px;
 }
 
 .expense__output {
@@ -211,24 +215,6 @@ p {
 
 .expense__category:focus {
   border: 1px solid orangered;
-}
-
-@media (max-width: 1110px) {
-  body {
-    background-color: gray;
-  }
-
-  .expense__box {
-    display: none;
-  }
-
-  .expense__subtitle {
-    display: block;
-  }
-
-  .expense__modal-limit {
-    display: none;
-  }
 }
 
 .expense__error-popup {
@@ -282,7 +268,7 @@ p {
   position: fixed;
   z-index: 10000;
   min-width: 991px;
-  transition: .3s transform linear, .3s opacity linear, .3s visibility linear;
+  transition: 0.3s transform linear, 0.3s opacity linear, 0.3s visibility linear;
 }
 
 .modal-limit--active {
@@ -326,7 +312,11 @@ p {
 }
 
 .overlay {
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
   background-color: rgba(1, 2, 2, 0.8);
+  overflow: hidden;
 }
 
 .modal-limit__close-btn {
@@ -336,4 +326,26 @@ p {
   position: absolute;
   right: 20px;
   top: 20px;
+}
+
+@media (max-width: 1110px) {
+  body {
+    background-color: gray;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+  }
+
+  .expense {
+    display: none;
+  }
+
+  .expense__subtitle {
+    display: block;
+  }
+
+  .expense__modal-limit {
+    display: none;
+  }
 }

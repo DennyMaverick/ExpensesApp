@@ -10,8 +10,9 @@
     <section class="expense__version-for-mobile">
       <h2 class="expense__subtitle">Only PC version</h2>
     </section>
-    <section class="expense__box">
-      <div class="container">
+
+    <section class="expense container">
+      <div class="expense__inner">
         <h1 class="expense__title">Expense accounting</h1>
         <div class="row expense__row-input">
           <div class="col">
@@ -74,17 +75,28 @@
       </div>
     </section>
 
-    <div class="js-modal-limit expense__modal-limit modal__limit-edit modal-limit">
+    <div
+      class="js-modal-limit expense__modal-limit modal__limit-edit modal-limit"
+    >
       <button class="js-modal-close-btn modal-limit__close-btn">
-        <img class="expense__close-btn-icon" src="./images/close-icon.svg" alt="close icon">
+        <img
+          class="expense__close-btn-icon"
+          src="./images/close-icon.svg"
+          alt="close icon"
+        />
       </button>
       <h2 class="modal-limit__title">New limit</h2>
       <div class="modal-limit__inner">
         <div class="modal-limit__input-container">
-          <input class="js-modal-limit-input modal-limit__input expense__input" type="number" />
+          <input
+            class="js-modal-limit-input modal-limit__input expense__input"
+            type="number"
+          />
           <p class="modal-limit__currency">RUB.</p>
         </div>
-        <button class="js-modal-limit-set-btn modal-limit__btn btn">Set limit</button>
+        <button class="js-modal-limit-set-btn modal-limit__btn btn">
+          Set limit
+        </button>
       </div>
     </div>
 
