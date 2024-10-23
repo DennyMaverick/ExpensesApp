@@ -1,6 +1,7 @@
 let LIMIT;
 const STORAGE_LABEL_LIMIT = 'limit';
 const limitFromStorage = localStorage.getItem(STORAGE_LABEL_LIMIT);
+
 let expenses = [];
 
 const currency = 'RUB.';
@@ -33,10 +34,12 @@ function removeExpensesFromStorage() {
 }
 
 function setLimitFromStorage() {
-  if (!limitFromStorage) {
+  const currentLimit = localStorage.getItem(STORAGE_LABEL_LIMIT);
+  if (!currentLimit) {
     LIMIT = 10000;
+    limitElement.innerText = LIMIT;
   } else {
-    LIMIT = limitFromStorage;
+    limitElement.innerText = localStorage.getItem(STORAGE_LABEL_LIMIT);
   }
 }
 
@@ -79,7 +82,6 @@ buttonElement.addEventListener('click', function () {
 });
 
 function init(expenses) {
-  limitElement.innerText = localStorage.getItem(STORAGE_LABEL_LIMIT);
   setLimitFromStorage();
   statusElement.innerText = STATUS_IN_LIMIT;
   sumElement.innerText = calculateExpanses(expenses);
