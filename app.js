@@ -1,10 +1,44 @@
-let LIMIT = 10000;
+let LIMIT;
+const STORAGE_LABEL_LIMIT = 'limit';
+const limitFromStorage = localStorage.getItem(STORAGE_LABEL_LIMIT);
+let expenses = [];
+
 const currency = 'RUB.';
 const STATUS_IN_LIMIT = 'Everything is okey';
 const STATUS_OUT_OF_LIMIT = 'Everything is bad';
 const STATUS_OUT_OF_LIMIT_CLASSNAME = 'expense__status--unsuccess';
 
-let expenses = [];
+const STORAGE_LABEL_EXPENSES = 'expenses';
+
+setExpensesToStorage();
+
+function setExpensesToStorage() {
+  let expensesFromStorageString = localStorage.getItem(STORAGE_LABEL_EXPENSES);
+  if (expensesFromStorageString === null) {
+    expenses = [];
+    return;
+  }
+  let expensesFromStorage = JSON.parse(expensesFromStorageString);
+
+  if (Array.isArray(expensesFromStorage)) {
+    expenses = expensesFromStorage;
+  }
+}
+
+function removeExpensesFromStorage() {
+  let expensesFromStorageString = localStorage.getItem(STORAGE_LABEL_EXPENSES);
+  if (expensesFromStorageString) {
+    localStorage.setItem(STORAGE_LABEL_EXPENSES, null);
+  }
+}
+
+function setLimitFromStorage() {
+  if (!limitFromStorage) {
+    LIMIT = 10000;
+  } else {
+    LIMIT = limitFromStorage;
+  }
+}
 
 const bodyEl = document.querySelector('body');
 
@@ -40,14 +74,23 @@ init(expenses);
 
 buttonElement.addEventListener('click', function () {
   trackExpense();
-
+  setExpensesToStorage();
   render(expenses);
 });
 
 function init(expenses) {
-  limitElement.innerText = LIMIT;
+  limitElement.innerText = localStorage.getItem(STORAGE_LABEL_LIMIT);
+  setLimitFromStorage();
   statusElement.innerText = STATUS_IN_LIMIT;
   sumElement.innerText = calculateExpanses(expenses);
+
+  render(expenses);
+}
+
+function saveExpensesToStorage() {
+  const expensesString = JSON.stringify(expenses);
+
+  localStorage.setItem(STORAGE_LABEL_EXPENSES, expensesString);
 }
 
 function trackExpense() {
@@ -71,6 +114,8 @@ function trackExpense() {
   const newExpense = {amount: currentAmount, category: currentCategory};
 
   expenses.push(newExpense);
+
+  saveExpensesToStorage();
 }
 
 function getExpenseFromUser() {
@@ -125,6 +170,7 @@ function renderSum(sum) {
 
 function renderStatus(sum) {
   const totalSum = calculateExpanses(expenses);
+
   if (sum <= LIMIT) {
     statusElement.innerText = STATUS_IN_LIMIT;
     statusElement.classList.remove(STATUS_OUT_OF_LIMIT_CLASSNAME);
@@ -140,7 +186,7 @@ inputElement.addEventListener('keypress', function (e) {
   const key = e.which || e.keyCode;
   if (key === 13) {
     trackExpense();
-
+    setExpensesToStorage();
     render(expenses);
   }
 });
@@ -153,6 +199,7 @@ function resetMinusInput(input) {
 
 function clearButtonHandler() {
   expenses = [];
+  removeExpensesFromStorage();
   render(expenses);
 }
 
@@ -184,6 +231,8 @@ function setLimit() {
   limitElement.innerText = newLimit;
 
   LIMIT = newLimit;
+
+  localStorage.setItem(STORAGE_LABEL_LIMIT, newLimit);
 
   render(expenses);
 
