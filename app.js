@@ -1,10 +1,12 @@
-const LIMIT = 10000;
-const currency = 'rub.';
+let LIMIT = 10000;
+const currency = 'RUB.';
 const STATUS_IN_LIMIT = 'Everything is okey';
 const STATUS_OUT_OF_LIMIT = 'Everything is bad';
 const STATUS_OUT_OF_LIMIT_CLASSNAME = 'expense__status--unsuccess';
 
 let expenses = [];
+
+const bodyEl = document.querySelector('body');
 
 const inputElement = document.querySelector('.js-expense-input');
 
@@ -23,6 +25,16 @@ const resetBtn = document.querySelector('.js-reset-btn');
 const expenseCategoryElem = document.querySelector('.js-expense-category');
 
 const errorPopup = document.querySelector('.js-expense__error-popup');
+
+const editLimitBtn = document.querySelector('.js-expense-limit-btn-edit');
+
+const modalLimitWindow = document.querySelector('.js-modal-limit');
+
+const modalLimitInput = document.querySelector('.js-modal-limit-input');
+
+const modalLimitBtn = document.querySelector('.js-modal-limit-set-btn');
+
+const modalCloseBtn = document.querySelector('.js-modal-close-btn');
 
 init(expenses);
 
@@ -119,7 +131,7 @@ function renderStatus(sum) {
   } else {
     statusElement.innerText = `${STATUS_OUT_OF_LIMIT} (${
       LIMIT - totalSum
-    } rub.)`;
+    } ${currency})`;
     statusElement.classList.add(STATUS_OUT_OF_LIMIT_CLASSNAME);
   }
 }
@@ -133,15 +145,11 @@ inputElement.addEventListener('keypress', function (e) {
   }
 });
 
-inputElement.addEventListener('input', resetMinusInput);
-
-function resetMinusInput() {
-  if (inputElement.value < 0) {
-    inputElement.value = '';
+function resetMinusInput(input) {
+  if (input.value < 0) {
+    input.value = '';
   }
 }
-
-resetBtn.addEventListener('click', clearButtonHandler);
 
 function clearButtonHandler() {
   expenses = [];
@@ -153,3 +161,61 @@ function getCategory() {
 
   return categoryName;
 }
+
+function setLimitHandler() {
+  const newLimit = parseInt(modalLimitInput.value);
+  if (!newLimit) {
+    return;
+  }
+}
+
+function openModalEditLimit() {
+  bodyEl.classList.add('overlay');
+  modalLimitWindow.classList.add('modal-limit--active');
+}
+
+function setLimit() {
+  const newLimit = parseInt(modalLimitInput.value);
+
+  if (!newLimit) {
+    return;
+  }
+
+  limitElement.innerText = newLimit;
+
+  LIMIT = newLimit;
+
+  render(expenses);
+
+  closeModalLimit();
+}
+
+function closeModalLimit() {
+  bodyEl.classList.remove('overlay');
+  modalLimitWindow.classList.remove('modal-limit--active');
+}
+
+modalLimitInput.addEventListener('keypress', function (e) {
+  const key = e.which || e.keyCode;
+  if (key === 13) {
+    setLimitHandler();
+
+    setLimit();
+
+    closeModalLimit();
+  }
+});
+
+modalCloseBtn.addEventListener('click', closeModalLimit);
+modalLimitBtn.addEventListener('click', setLimit);
+editLimitBtn.addEventListener('click', openModalEditLimit);
+modalLimitInput.addEventListener('change', setLimitHandler);
+resetBtn.addEventListener('click', clearButtonHandler);
+
+inputElement.addEventListener('input', function () {
+  resetMinusInput(inputElement);
+});
+
+modalLimitInput.addEventListener('input', function () {
+  resetMinusInput(modalLimitInput);
+});

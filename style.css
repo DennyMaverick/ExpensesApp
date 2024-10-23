@@ -25,6 +25,13 @@ ul {
   padding: 0;
 }
 
+h1,
+h2,
+h3,
+p {
+  margin: 0;
+}
+
 .expense__title {
   text-transform: uppercase;
   font-size: 25px;
@@ -65,6 +72,25 @@ ul {
   color: #fff;
   background-color: #2b2b2b;
   min-width: 500px;
+}
+
+.expense__limit {
+  margin-bottom: 20px;
+}
+
+.expense__limit-value {
+  margin-right: 12px;
+}
+
+.expense__limit-icon {
+  width: 42px;
+  height: 42px;
+}
+
+.expense__limit-edit-btn {
+  cursor: pointer;
+  background-color: transparent;
+  border: none;
 }
 
 .btn {
@@ -115,16 +141,22 @@ ul {
   transition: border 0.3s linear;
 }
 
-.expense__input-box::after {
-  content: 'rub.';
-  text-transform: uppercase;
+.expense__status {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.expense__status-value {
+  font-size: 20px;
 }
 
 .expense__input:focus {
   border: 2px solid #2b2b2b;
 }
 
-.expense__row-input, .expense__row-category {
+.expense__row-input,
+.expense__row-category {
   padding: 40px 50px;
   border-radius: 5px;
   margin-bottom: 40px;
@@ -166,6 +198,7 @@ ul {
 }
 
 .expense__category {
+  cursor: pointer;
   font-size: 15px;
   text-transform: uppercase;
   min-width: 250px;
@@ -173,7 +206,7 @@ ul {
   border-radius: 5px;
   outline: none;
   border: 1px solid transparent;
-  transition: .3s linear border;
+  transition: 0.3s linear border;
 }
 
 .expense__category:focus {
@@ -181,7 +214,6 @@ ul {
 }
 
 @media (max-width: 1110px) {
-
   body {
     background-color: gray;
   }
@@ -192,6 +224,10 @@ ul {
 
   .expense__subtitle {
     display: block;
+  }
+
+  .expense__modal-limit {
+    display: none;
   }
 }
 
@@ -206,11 +242,98 @@ ul {
   background-color: #2b2b2b;
   border-radius: 5px;
   color: red;
-  transition: .4s linear opacity, .4s linear visibility, .4s linear transform;
+  transition: 0.4s linear opacity, 0.4s linear visibility, 0.4s linear transform;
+}
+
+.expense__limit-title,
+.expense__total-title,
+.expense__status-title {
+  display: inline-block;
+  font-size: 32px;
+  color: rgb(173, 57, 57);
+}
+
+.expense__total {
+  margin-bottom: 20px;
+}
+
+.expense__status {
+  margin-bottom: 20px;
 }
 
 .hide {
   opacity: 0;
   visibility: hidden;
   transform: scale(0);
+}
+
+.currency::after {
+  content: ' rub.';
+  text-transform: uppercase;
+  font-size: 20px;
+}
+
+.modal-limit {
+  transform: scale(0);
+  opacity: 0;
+  visibility: hidden;
+  background-color: #fff;
+  padding: 47px;
+  position: fixed;
+  z-index: 10000;
+  min-width: 991px;
+  transition: .3s transform linear, .3s opacity linear, .3s visibility linear;
+}
+
+.modal-limit--active {
+  transform: scale(1);
+  opacity: 1;
+  visibility: visible;
+}
+
+.modal-limit__title {
+  font-size: 32px;
+  line-height: 38px;
+  margin-bottom: 147px;
+  text-transform: uppercase;
+}
+
+.modal-limit__inner {
+  display: flex;
+  justify-content: space-between;
+}
+
+.modal-limit__input {
+  display: inline-block;
+  width: 100%;
+  height: 58px;
+}
+
+.modal-limit__input-container {
+  position: relative;
+  width: 50.8%;
+}
+
+.modal-limit__currency {
+  position: absolute;
+  right: 27px;
+  top: 40%;
+}
+
+.modal-limit__btn {
+  width: 41.9%;
+  height: 58px;
+}
+
+.overlay {
+  background-color: rgba(1, 2, 2, 0.8);
+}
+
+.modal-limit__close-btn {
+  cursor: pointer;
+  background-color: transparent;
+  border: none;
+  position: absolute;
+  right: 20px;
+  top: 20px;
 }
