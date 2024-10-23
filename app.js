@@ -39,8 +39,11 @@ function setLimitFromStorage() {
     LIMIT = 10000;
     limitElement.innerText = LIMIT;
   } else {
+    LIMIT = localStorage.getItem(STORAGE_LABEL_LIMIT);
+
     limitElement.innerText = localStorage.getItem(STORAGE_LABEL_LIMIT);
   }
+  return LIMIT;
 }
 
 const bodyEl = document.querySelector('body');
@@ -172,7 +175,7 @@ function renderSum(sum) {
 
 function renderStatus(sum) {
   const totalSum = calculateExpanses(expenses);
-
+  setLimitFromStorage();
   if (sum <= LIMIT) {
     statusElement.innerText = STATUS_IN_LIMIT;
     statusElement.classList.remove(STATUS_OUT_OF_LIMIT_CLASSNAME);
